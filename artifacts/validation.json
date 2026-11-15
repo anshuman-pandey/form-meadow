@@ -1,13 +1,13 @@
 {
-  "checked_at": "2026-11-15T05:40:04.150127+00:00",
+  "checked_at": "2026-11-15T06:42:13.377390+00:00",
   "state": "development component; not launch-ready",
-  "tests": "15 Python unittest cases passed; disposable create/submit/inbox/CSV demo passed",
+  "tests": "23 Python tests passed, including actual HTTP owner/respondent lifecycle, export, deletion, auth/origin/Host rejection, validation, rate and size limits",
   "not_implemented": [
-    "Owner authentication",
-    "Respondent web route",
     "Visual builder and inbox",
+    "Respondent browser UI",
     "Six UI locales",
-    "Browser acceptance"
+    "Browser acceptance",
+    "Production deployment"
   ],
   "publication": "No public writes"
 }

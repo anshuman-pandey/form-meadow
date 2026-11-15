@@ -15,6 +15,30 @@ The disposable demo creates a form, opens it, submits synthetic data, reads the 
 
 Implemented: text, email, single-choice and explicit consent fields; required-field validation; closed-by-default forms; immutable question versions; stale-edit/submission detection; idempotent retries; persisted inbox; and CSV export with spreadsheet-formula escaping. CSV uses one row per answer, retaining each response's original label and version. Do not claim legal compliance from the existence of a consent checkbox.
 
-Still required: authenticated owner interface, public respondent route with request limits, polished builder/inbox, six interface languages, browser acceptance, real screenshots, install/deployment instructions and owner launch handoff. The storage API has **no authorization layer** and must not be exposed directly over HTTP. No payments, uploads, conditional logic, email delivery, AI, or feature parity with Tally is claimed.
+Implemented development API: bearer-authenticated owner routes, unauthenticated open-form reads/submissions, strict loopback Host/Origin checks, 160 KB request limit, 60 respondent attempts per minute, and owner-only response deletion.
+
+Still required: polished builder/inbox, respondent browser UI, six interface languages, browser acceptance, real screenshots, production deployment instructions and owner launch handoff. The storage API has **no authorization layer** and must not be exposed directly over HTTP. No payments, uploads, conditional logic, email delivery, AI, or feature parity with Tally is claimed.
 
 See [scope and distribution](docs/SCOPE.md). MIT licensed. Publication needs the owner's separate product-specific go-ahead.
+
+## Run the development API
+
+```sh
+export FORM_MEADOW_OWNER_TOKEN="$(python3 -c 'import secrets; print(secrets.token_urlsafe(32))')"
+python3 server.py
+```
+
+The server binds only to `127.0.0.1:5143`. This is an API, not a browser application yet. Do not expose this development server through a public proxy. Owner requests use `Authorization: Bearer <token>`; never put the token in URLs. JSON writes require `Content-Type: application/json` and a length. Tokens are kept in server memory and are not logged.
+
+| Route | Access | Method |
+|---|---|---|
+| `/api/owner/forms` | Owner | GET list / POST create |
+| `/api/owner/forms/{id}/open` | Owner | POST `{ "open": true }` |
+| `/api/owner/forms/{id}/revise` | Owner | POST revision and schema |
+| `/api/owner/forms/{id}/inbox` | Owner | GET |
+| `/api/owner/forms/{id}/csv` | Owner | GET |
+| `/api/owner/forms/{id}/delete-response` | Owner | POST response id |
+| `/api/forms/{id}` | Respondent | GET open form only |
+| `/api/forms/{id}/submit` | Respondent | POST revision, answers, request_key |
+
+One global respondent attempt budget applies to this single-user development server. It resets on restart; it is not production abuse protection. Deleting a response also deletes its request-key receipt, so a later retry may create a new response if the form remains open. Deletion does not erase backups. Stop the server before copying its SQLite file. No HTTPS, deployment or browser security acceptance is claimed yet.
