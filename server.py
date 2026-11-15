@@ -54,7 +54,7 @@ def make_server(path,owner_token,port=5143,submission_limit=60):
         def dispatch(self,mutation):
             if not self.trusted():return self.send(403,{'error':'Use the exact loopback origin.'})
             if not mutation:
-                assets={'/':('index.html','text/html; charset=utf-8'),'/app.js':('app.js','text/javascript'),'/style.css':('style.css','text/css')}
+                assets={'/messages.js':('messages.js','text/javascript'),'/i18n.js':('i18n.js','text/javascript'),'/':('index.html','text/html; charset=utf-8'),'/app.js':('app.js','text/javascript'),'/style.css':('style.css','text/css')}
                 if re.fullmatch('/f/'+ID,self.path):
                     assets[self.path]=('index.html','text/html; charset=utf-8')
                 if self.path in assets:

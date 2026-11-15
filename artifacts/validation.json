@@ -1,17 +1,17 @@
 {
-  "checked_at": "2026-11-15T08:38:37.241090+00:00",
-  "state": "local English UI preview; incomplete",
+  "checked_at": "2026-11-15T09:37:54.327986+00:00",
+  "state": "six-language local preview; owner review pending",
   "tests": "23 Python tests passed, including actual HTTP owner/respondent lifecycle, export, deletion, auth/origin/Host rejection, validation, rate and size limits",
   "not_implemented": [
-    "Six UI locales",
     "Production deployment"
   ],
   "publication": "No public writes",
   "browser": "Both suites pass: owner/respondent lifecycle plus required choice/consent, email, inert answers, canceled navigation drafts, stale revisions, preserved original labels and deletion",
   "pending": [
-    "Six UI locales",
+    "Native-speaker review",
     "Owner acceptance",
     "Production deployment"
   ],
-  "fix": "Explicit respondent label associations prevent option text contaminating choice labels"
+  "fix": "Explicit respondent label associations prevent option text contaminating choice labels",
+  "locales": "Passed: six locales, regional negotiation, preference persistence, drafts, unchanged user text and respondent answers, translated receipt"
 }
