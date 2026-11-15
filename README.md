@@ -2,7 +2,7 @@
 
 ![Actual builder and response inbox](docs/assets/builder.png)
 
-A focused open-source alternative to Tally, in preparation: forms, a response inbox, and CSV export. **The local browser workflow is tested. Production deployment remains unfinished; nothing is published.**
+A focused open-source alternative to Tally, in preparation: forms, a response inbox, and CSV export. **The local browser workflow is tested. Source is published; production deployment remains unfinished.**
 
 ## Run the current component
 

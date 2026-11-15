@@ -1,3 +1,5 @@
+> Source publication authorized and completed. Repository creation instructions below are historical preparation notes. No hosted deployment or release was created.
+
 # Form Meadow local preview handoff
 
 Runnable package: /workspace/form-meadow-development.zip. Follow README.md to generate an owner token and run `python3 server.py`; open http://127.0.0.1:5143. Respondent links work on the same machine only. This is not a public hosted form service.
