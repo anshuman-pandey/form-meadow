@@ -19,7 +19,7 @@ Implemented: text, email, single-choice and explicit consent fields; required-fi
 
 Implemented development API: bearer-authenticated owner routes, unauthenticated open-form reads/submissions, strict loopback Host/Origin checks, 160 KB request limit, 60 respondent attempts per minute, and owner-only response deletion.
 
-The visual builder, respondent page and owner inbox now pass browser acceptance in separate owner/respondent contexts, with CSV download, closed forms and narrow layout. Still required: six interface languages, broader choice/consent/edit browser coverage, production deployment instructions and owner launch handoff. The storage API has **no authorization layer** and must not be exposed directly over HTTP. No payments, uploads, conditional logic, email delivery, AI, or feature parity with Tally is claimed.
+The visual builder, respondent page and owner inbox now pass browser acceptance in separate owner/respondent contexts, with CSV download, closed forms and narrow layout. Still required: six interface languages, production deployment instructions and owner launch handoff. The storage API has **no authorization layer** and must not be exposed directly over HTTP. No payments, uploads, conditional logic, email delivery, AI, or feature parity with Tally is claimed.
 
 See [scope and distribution](docs/SCOPE.md). MIT licensed. Publication needs the owner's separate product-specific go-ahead.
 
@@ -48,3 +48,5 @@ One global respondent attempt budget applies to this single-user development ser
 ## Browser verification
 
 Run `npm ci`, `npx playwright install chromium`, then `npm run test:browser`. Set `CHROMIUM_PATH` when using an existing Chromium installation. The runner creates a disposable library and random owner token; screenshots use synthetic data. Owner credentials remain in tab memory, never localStorage or sessionStorage.
+
+Expanded browser acceptance covers required single-choice and consent controls, email validation, inert answer rendering, canceled navigation preserving drafts, stale respondent revisions, original labels in the inbox, and response deletion. Labels use explicit control associations. Six-language UI support is still pending.

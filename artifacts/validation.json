@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-15T07:40:39.428799+00:00",
+  "checked_at": "2026-11-15T08:38:37.241090+00:00",
   "state": "local English UI preview; incomplete",
   "tests": "23 Python tests passed, including actual HTTP owner/respondent lifecycle, export, deletion, auth/origin/Host rejection, validation, rate and size limits",
   "not_implemented": [
@@ -7,9 +7,11 @@
     "Production deployment"
   ],
   "publication": "No public writes",
-  "browser": "Passed: separate owner/respondent contexts, create/open/submit/inbox/CSV, closed forms, unauthorized inbox, narrow layout and memory-only logout",
+  "browser": "Both suites pass: owner/respondent lifecycle plus required choice/consent, email, inert answers, canceled navigation drafts, stale revisions, preserved original labels and deletion",
   "pending": [
-    "Broader choice/consent/revision browser coverage",
-    "Owner acceptance"
-  ]
+    "Six UI locales",
+    "Owner acceptance",
+    "Production deployment"
+  ],
+  "fix": "Explicit respondent label associations prevent option text contaminating choice labels"
 }
