@@ -9,6 +9,7 @@ import re
 import sqlite3
 import threading
 import time
+from pathlib import Path
 from forms import Forms, FormError
 
 MAX_BODY=160_000
@@ -35,7 +36,7 @@ def make_server(path,owner_token,port=5143,submission_limit=60):
             self.send_header('Content-Length',str(len(body)))
             self.send_header('Cache-Control','no-store')
             self.send_header('X-Content-Type-Options','nosniff')
-            self.send_header('Content-Security-Policy',"default-src 'none'; frame-ancestors 'none'")
+            self.send_header('Content-Security-Policy',"default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'")
             self.send_header('Referrer-Policy','no-referrer')
             self.end_headers();self.wfile.write(body)
 
@@ -52,6 +53,13 @@ def make_server(path,owner_token,port=5143,submission_limit=60):
 
         def dispatch(self,mutation):
             if not self.trusted():return self.send(403,{'error':'Use the exact loopback origin.'})
+            if not mutation:
+                assets={'/':('index.html','text/html; charset=utf-8'),'/app.js':('app.js','text/javascript'),'/style.css':('style.css','text/css')}
+                if re.fullmatch('/f/'+ID,self.path):
+                    assets[self.path]=('index.html','text/html; charset=utf-8')
+                if self.path in assets:
+                    name,kind=assets[self.path]
+                    return self.send(200,(Path(__file__).parent/'web'/name).read_bytes(),kind)
             is_owner=self.path.startswith('/api/owner/')
             if is_owner and not self.owner():return self.send(401,{'error':'Owner authentication required.'})
             data={};store=None

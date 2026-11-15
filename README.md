@@ -1,6 +1,8 @@
-# Form Meadow · development checkout
+# Form Meadow · local preview
 
-A focused open-source alternative to Tally, in preparation: forms, a response inbox, and CSV export. **This is a tested storage component, not a finished or published product.**
+![Actual builder and response inbox](docs/assets/builder.png)
+
+A focused open-source alternative to Tally, in preparation: forms, a response inbox, and CSV export. **The local browser workflow is tested. Localization and production deployment remain unfinished; nothing is published.**
 
 ## Run the current component
 
@@ -17,7 +19,7 @@ Implemented: text, email, single-choice and explicit consent fields; required-fi
 
 Implemented development API: bearer-authenticated owner routes, unauthenticated open-form reads/submissions, strict loopback Host/Origin checks, 160 KB request limit, 60 respondent attempts per minute, and owner-only response deletion.
 
-Still required: polished builder/inbox, respondent browser UI, six interface languages, browser acceptance, real screenshots, production deployment instructions and owner launch handoff. The storage API has **no authorization layer** and must not be exposed directly over HTTP. No payments, uploads, conditional logic, email delivery, AI, or feature parity with Tally is claimed.
+The visual builder, respondent page and owner inbox now pass browser acceptance in separate owner/respondent contexts, with CSV download, closed forms and narrow layout. Still required: six interface languages, broader choice/consent/edit browser coverage, production deployment instructions and owner launch handoff. The storage API has **no authorization layer** and must not be exposed directly over HTTP. No payments, uploads, conditional logic, email delivery, AI, or feature parity with Tally is claimed.
 
 See [scope and distribution](docs/SCOPE.md). MIT licensed. Publication needs the owner's separate product-specific go-ahead.
 
@@ -28,7 +30,7 @@ export FORM_MEADOW_OWNER_TOKEN="$(python3 -c 'import secrets; print(secrets.toke
 python3 server.py
 ```
 
-The server binds only to `127.0.0.1:5143`. This is an API, not a browser application yet. Do not expose this development server through a public proxy. Owner requests use `Authorization: Bearer <token>`; never put the token in URLs. JSON writes require `Content-Type: application/json` and a length. Tokens are kept in server memory and are not logged.
+The server binds only to `127.0.0.1:5143`. Open http://127.0.0.1:5143 in your browser and enter your owner token. Create questions, save the form, then open it to accept responses. The respondent link works on this same machine only; it is not a public share link. Do not expose this development server through a public proxy. Owner requests use `Authorization: Bearer <token>`; never put the token in URLs. JSON writes require `Content-Type: application/json` and a length. Tokens are kept in server memory and are not logged.
 
 | Route | Access | Method |
 |---|---|---|
@@ -42,3 +44,7 @@ The server binds only to `127.0.0.1:5143`. This is an API, not a browser applica
 | `/api/forms/{id}/submit` | Respondent | POST revision, answers, request_key |
 
 One global respondent attempt budget applies to this single-user development server. It resets on restart; it is not production abuse protection. Deleting a response also deletes its request-key receipt, so a later retry may create a new response if the form remains open. Deletion does not erase backups. Stop the server before copying its SQLite file. No HTTPS, deployment or browser security acceptance is claimed yet.
+
+## Browser verification
+
+Run `npm ci`, `npx playwright install chromium`, then `npm run test:browser`. Set `CHROMIUM_PATH` when using an existing Chromium installation. The runner creates a disposable library and random owner token; screenshots use synthetic data. Owner credentials remain in tab memory, never localStorage or sessionStorage.
