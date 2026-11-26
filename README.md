@@ -50,3 +50,7 @@ One global respondent attempt budget applies to this single-user development ser
 Run `npm ci`, `npx playwright install chromium`, then `npm run test:browser`. Set `CHROMIUM_PATH` when using an existing Chromium installation. The runner creates a disposable library and random owner token; screenshots use synthetic data. Owner credentials remain in tab memory, never localStorage or sessionStorage.
 
 Expanded browser acceptance covers required single-choice and consent controls, email validation, inert answer rendering, canceled navigation preserving drafts, stale respondent revisions, original labels in the inbox, and response deletion. Labels use explicit control associations. Language switching preserves drafts and respondent answers. User-authored content is never translated.
+
+## Current verification
+
+See the [26 November audit checkpoint](docs/AUDIT.md) for the verified repository, release links, fresh core test result and remaining deployment/browser gates. Earlier validation records remain dated evidence.

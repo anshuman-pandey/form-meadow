@@ -13,5 +13,29 @@
     "Production deployment"
   ],
   "fix": "Explicit respondent label associations prevent option text contaminating choice labels",
-  "locales": "Passed: six locales, regional negotiation, preference persistence, drafts, unchanged user text and respondent answers, translated receipt"
+  "locales": "Passed: six locales, regional negotiation, preference persistence, drafts, unchanged user text and respondent answers, translated receipt",
+  "current_audit": {
+    "checked_at": "2026-11-26T13:36:59.571702+00:00",
+    "source_head": "ed848ad505097be394ac3fdf5db99516bb2ea149",
+    "source_publication": "https://github.com/anshuman-pandey/form-meadow",
+    "source_public": true,
+    "ci": {
+      "conclusion": "success",
+      "headSha": "ed848ad505097be394ac3fdf5db99516bb2ea149",
+      "status": "completed",
+      "url": "https://github.com/anshuman-pandey/form-meadow/actions/runs/43703043111"
+    },
+    "local_core_check": {
+      "exit": 0,
+      "summary": "----------------------------------------------------------------------\nRan 23 tests in 3.995s\n\nOK\n"
+    },
+    "release_urls": [],
+    "hosted_demo_url": null,
+    "remaining_gates": [
+      "Native-speaker review",
+      "Owner acceptance",
+      "Production deployment"
+    ],
+    "note": "Historical validation below is retained as dated evidence. Source publication does not establish a hosted deployment."
+  }
 }
